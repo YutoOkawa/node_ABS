@@ -8,7 +8,7 @@ def main():
     data = json.loads(sys.stdin.readline())
     tpk = absinst.decodestr(data['tpk'])
     apk = absinst.decodestr(data['apk'])
-    lam = absinst.decodestr(data['lam'])
+    lam = absinst.decodestr(data['sign'])
     message = data['message']
     policy = data['policy']
     result = absinst.verify((tpk,apk),lam,message,policy)
