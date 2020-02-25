@@ -75,13 +75,25 @@ const absSystem = async() => {
     var message = "message";
     var policy = "HRD OR DD AND SCHIEF";
     // var policy = "DD AND SCHIEF";
+    console.time("Setup");
     const check = await absSetup();
-    if (check) console.log("Setup Completed.")
+    if (check) {
+        console.timeEnd("Setup");
+        console.log("Setup Completed.");
+    }
+    console.time("AttrGen");
     const ska = await absAttrgen(key_list);
+    console.timeEnd("AttrGen");
     console.log("Key Generated.")
+
+    console.time("Sign");
     const sign = await absSign(key_list,ska,message,policy);
+    console.timeEnd("Sign");
     console.log("Sign Generated.");
+
+    console.time("Ver");
     const ver = await absVer(key_list,sign,message,policy);
+    console.timeEnd("Ver");
     if (ver) console.log("OK");
     else console.log("NG");
 }
